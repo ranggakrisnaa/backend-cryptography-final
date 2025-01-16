@@ -14,7 +14,6 @@ import { ConfigService } from '@nestjs/config';
 import { AllConfigType } from './config/config.type';
 
 let server: express.Application; // Define server in global scope
-
 async function bootstrap() {
   server = express(); // Define server once here
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server)); // Use the 'server'
