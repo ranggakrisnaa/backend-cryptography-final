@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import sharp from 'sharp';
 import { CaesarChiperService } from '../caesar-chiper/caesar-chiper.service';
-import { IEncryptLsbResponse } from '../../src/common/interfaces/lsb-encript-response.interface';
-import { FileTypeEnum } from '../../src/common/enums/file-type.enum';
-import { MinSizeImageEnum } from '../../src/common/enums/min-size-image.interface';
-import { IDecryptLsbResponse } from '../../src/common/interfaces/lsb-decrypt-response.interface';
-import { IGetInfoFile } from '../../src/common/interfaces/lsb-get-info-file.interface';
-import { IConvertMarker } from '../../src/common/interfaces/convert-marker.interface';
+import { IEncryptLsbResponse } from '../common/interfaces/lsb-encript-response.interface';
+import { FileTypeEnum } from '../common/enums/file-type.enum';
+import { MinSizeImageEnum } from '../common/enums/min-size-image.interface';
+import { IDecryptLsbResponse } from '../common/interfaces/lsb-decrypt-response.interface';
+import { IGetInfoFile } from '../common/interfaces/lsb-get-info-file.interface';
+import { IConvertMarker } from '../common/interfaces/convert-marker.interface';
 
 @Injectable()
 export class LsbService {

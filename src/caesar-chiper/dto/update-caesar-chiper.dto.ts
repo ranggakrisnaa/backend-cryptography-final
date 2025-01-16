@@ -1,4 +1,4 @@
-import { StringField } from '../../../src/decorators/field.deorator';
+import { StringField } from '../../decorators/field.deorator';
 
 export class UpdateCaesarChiperDto {
   @StringField()
