@@ -1,8 +1,8 @@
 import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { CaesarChiperService } from './caesar-chiper.service';
-import { Public } from 'src/decorators/public.decorator';
-import { ApiPublic } from 'src/decorators/http.decorator';
+import { Public } from '../../src/decorators/public.decorator';
+import { ApiPublic } from '../../src/decorators/http.decorator';
 import { UpdateCaesarChiperDto } from './dto/update-caesar-chiper.dto';
 import { CreateCaesarChiperDto } from './dto/create-caesar-chiper.dto';
 

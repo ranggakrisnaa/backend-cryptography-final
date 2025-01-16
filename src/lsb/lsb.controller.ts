@@ -13,8 +13,8 @@ import { Response } from 'express';
 import { CaesarChiperService } from '../caesar-chiper/caesar-chiper.service';
 import { CreateLsbDto } from './dto/create-lsb.dto';
 import { LsbService } from './lsb.service';
-import { Public } from 'src/decorators/public.decorator';
-import { ApiPublic } from 'src/decorators/http.decorator';
+import { Public } from '../../src/decorators/public.decorator';
+import { ApiPublic } from '../../src/decorators/http.decorator';
 
 @Controller('lsb')
 export class LsbController {
