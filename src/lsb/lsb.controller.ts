@@ -86,6 +86,8 @@ export class LsbController {
     @Res() res: Response,
   ): Promise<void> {
     try {
+      console.log(file);
+
       const image = await this.lsbService.getInfoFile(file);
 
       res.status(HttpStatus.OK).json({

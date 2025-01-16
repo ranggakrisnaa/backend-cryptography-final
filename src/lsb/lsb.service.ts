@@ -183,19 +183,27 @@ export class LsbService {
   public async getInfoFile(
     fileImage: Express.Multer.File,
   ): Promise<IGetInfoFile> {
-    const image = sharp(fileImage.buffer);
+    try {
+      const image = sharp(fileImage.buffer);
 
-    // Dapatkan raw pixel data
-    const { info } = await image.raw().toBuffer({ resolveWithObject: true });
-    console.log(fileImage);
+      // Dapatkan metadata gambar
+      const metadata = await image.metadata();
 
-    return {
-      size: `${(info.size / (1024 * 1024)).toFixed(3)} MB`,
-      resolution: `${info.width}px x ${info.height}px`,
-      imageType: fileImage.mimetype,
-      fileName: fileImage.originalname,
-      lastModified: new Date().toString(),
-    };
+      if (!metadata.size || !metadata.width || !metadata.height) {
+        throw new Error('Metadata gambar tidak lengkap.');
+      }
+
+      return {
+        size: `${(metadata.size / (1024 * 1024)).toFixed(3)} MB`,
+        resolution: `${metadata.width}px x ${metadata.height}px`,
+        imageType: fileImage.mimetype,
+        fileName: fileImage.originalname,
+        lastModified: new Date().toString(),
+      };
+    } catch (error) {
+      console.error('Error:', error.message);
+      throw new Error(`Gagal memproses buffer gambar: ${error.message}`);
+    }
   }
 
   private stringToBinary(str: string): string {

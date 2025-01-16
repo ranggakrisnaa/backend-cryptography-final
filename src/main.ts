@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ExpressAdapter } from '@nestjs/platform-express';
-import * as express from 'express'; // Corrected import
+import express from 'express'; // Corrected import
 import {
   HttpStatus,
   RequestMethod,
@@ -21,7 +21,6 @@ async function bootstrap() {
 
   app.enableVersioning({
     type: VersioningType.URI,
-    defaultVersion: '1',
   });
 
   const configService = app.get(ConfigService<AllConfigType>);
