@@ -13,6 +13,7 @@ import setupSwagger from './utils/setup-swagger.util';
 import { ValidationError } from 'class-validator';
 import { ConfigService } from '@nestjs/config';
 import { AllConfigType } from './config/config.type';
+import cors from 'cors';
 
 let server: express.Application; // Define server in global scope
 async function bootstrap() {
@@ -34,6 +35,13 @@ async function bootstrap() {
     },
   );
 
+  app.use(
+    cors({
+      origin: 'http://localhost3001',
+      methods: 'GET,POST,PUT,DELETE',
+      allowedHeaders: 'Content-Type, Authorization',
+    }),
+  );
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
