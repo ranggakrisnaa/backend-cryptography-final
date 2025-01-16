@@ -18,8 +18,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   setupSwagger(app);
 
-  // Return the HTTP server to Vercel
-  return app;
+  await app.listen(3000);
 }
 
 bootstrap();
