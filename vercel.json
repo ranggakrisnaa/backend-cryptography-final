@@ -7,7 +7,7 @@
     }
   ],
   "functions": {
-    "src/main.ts": {
+    "*": {
       "maxDuration": 30
     }
   },
