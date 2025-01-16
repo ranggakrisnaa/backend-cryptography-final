@@ -5,15 +5,24 @@ import express from 'express';
 import { VersioningType } from '@nestjs/common';
 import setupSwagger from './utils/setup-swagger.util';
 
+// This function will create a serverless-compatible handler
 async function bootstrap() {
   const server = express();
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
-  await app.listen(process.env.PORT ?? 3000);
+
   app.enableVersioning({
     type: VersioningType.URI,
     defaultVersion: '1',
   });
+
   setupSwagger(app);
+
+  // Return the HTTP server to Vercel
   return app;
 }
-export default bootstrap().then((app) => app.getHttpServer());
+
+// Export the serverless handler for Vercel
+export default async (req, res) => {
+  const app = await bootstrap();
+  return app.getHttpServer()(req, res); // Delegate the request to NestJS app
+};
