@@ -4,6 +4,7 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import * as express from 'express'; // Corrected import
 import {
   HttpStatus,
+  RequestMethod,
   UnprocessableEntityException,
   ValidationPipe,
   VersioningType,
@@ -23,6 +24,17 @@ async function bootstrap() {
     defaultVersion: '1',
   });
 
+  const configService = app.get(ConfigService<AllConfigType>);
+  app.setGlobalPrefix(
+    configService.getOrThrow('app.apiPrefix', { infer: true }),
+    {
+      exclude: [
+        { method: RequestMethod.GET, path: '/' },
+        { method: RequestMethod.GET, path: 'health' },
+      ],
+    },
+  );
+
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -34,8 +46,6 @@ async function bootstrap() {
     }),
   );
   setupSwagger(app);
-
-  app.get(ConfigService<AllConfigType>);
 
   await app.listen(3000);
 }
